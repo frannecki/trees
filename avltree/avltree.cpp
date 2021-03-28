@@ -9,8 +9,8 @@ bool avltree::insertKey(int key){
     if(node)  return false;
     node = new avlnode(key);
 
-    /// check for inbalance
-    checkForInbalance();
+    /// check for imbalance
+    checkForImbalance();
     return true;
 }
 
@@ -36,8 +36,8 @@ bool avltree::removeKey(int key){
             else  tmpp->rc = tmp->rc;
         }
     } 
-    /// check for inbalance
-    checkForInbalance();
+    /// check for imbalance
+    while(checkForImbalance());
     return true;
 }
 
@@ -56,12 +56,12 @@ void avltree::trav(avlnode* rt){
 
 
 /**
- * Check for inbalance and restore
+ * Check for imbalance and restore
  */
-void avltree::checkForInbalance(){
+bool avltree::checkForImbalance(){
     avlnode* g = NULL;
     backwardbl(root, g);
-    if(!g)  return;
+    if(!g)  return false;
     avlnode *p, *c;
     p = (g->bl > 0)?(g->lc):(g->rc);
     c = (p->bl > 0)?(p->lc):(p->rc);
@@ -91,6 +91,7 @@ void avltree::checkForInbalance(){
     g->val = keys[1];
     g->lc = new avlnode(keys[0], x1, x2);
     g->rc = new avlnode(keys[2], x3, x4);
+    return true;
 }
 
 

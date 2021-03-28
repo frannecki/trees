@@ -8,7 +8,7 @@
 struct avlnode{
     int val;
     avlnode *lc, *rc;  // left child and right child
-    int bl;  // inbalance
+    int bl;  // imbalance
     avlnode(int v=0, avlnode* lp=NULL, avlnode* rp=NULL): val(v), bl(0), lc(lp), rc(rp){};
 };
 
@@ -18,7 +18,7 @@ public:
     bool insertKey(int);
     bool removeKey(int);
     void traversal();
-    void checkForInbalance();
+    bool checkForImbalance();
 
 private:
     avlnode* root;
